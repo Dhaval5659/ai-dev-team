@@ -1,0 +1,15 @@
+[project]
+name = "ai_dev_team"
+version = "0.1.0"
+description = "AI Software Development Team using CrewAI"
+authors = [
+    {name = "Dhaval"}
+]
+requires-python = ">=3.10"
+
+dependencies = [
+    "crewai",
+    "crewai-tools",
+    "langchain-openai",
+    "python-dotenv"
+]
