@@ -4,3 +4,26 @@ __pycache__/
 memory/
 output/
 *.pyc
+
+# Virtual environments
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# Build files
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
