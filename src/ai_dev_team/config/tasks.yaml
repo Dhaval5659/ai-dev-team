@@ -1,0 +1,76 @@
+gather_requirements:
+  description: >
+    Analyze this software project idea:
+
+    "{project_idea}"
+
+    Create a detailed Product Requirements Document (PRD).
+
+    Include:
+    - Project overview
+    - Target users
+    - Core features
+    - Functional requirements
+    - Non-functional requirements
+    - MVP scope
+    - Future improvements
+
+  expected_output: >
+    A detailed markdown Product Requirements Document.
+
+  output_file: output/requirements.md
+
+
+design_architecture:
+  description: >
+    Based on the product requirements,
+    design the complete software architecture.
+
+    Include:
+    - system architecture
+    - backend architecture
+    - API endpoints
+    - database schema
+    - folder structure
+    - authentication flow
+    - recommended technologies
+
+  expected_output: >
+    A detailed markdown software architecture document.
+
+  output_file: output/architecture.md
+
+
+develop_backend:
+  description: >
+    Based on the architecture document,
+    generate production-ready FastAPI backend code.
+
+    Include:
+    - API routes
+    - models
+    - request validation
+    - authentication structure
+    - CRUD operations
+
+  expected_output: >
+    Production-ready FastAPI backend code.
+
+  output_file: output/backend_api.py
+
+
+create_test_cases:
+  description: >
+    Analyze the backend system and generate comprehensive QA test cases.
+
+    Include:
+    - positive test cases
+    - negative test cases
+    - edge cases
+    - authentication tests
+    - API validation tests
+
+  expected_output: >
+    A detailed markdown QA test document.
+
+  output_file: output/test_cases.md
