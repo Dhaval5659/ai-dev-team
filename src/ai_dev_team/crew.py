@@ -44,25 +44,29 @@ class AIDevTeam:
     @task
     def gather_requirements(self) -> Task:
         return Task(
-            config=self.tasks_config["gather_requirements"]
+            config=self.tasks_config["gather_requirements"],
+            agent=self.product_manager()
         )
 
     @task
     def design_architecture(self) -> Task:
         return Task(
-            config=self.tasks_config["design_architecture"]
+            config=self.tasks_config["design_architecture"],
+            agent=self.software_architect()
         )
 
     @task
     def develop_backend(self) -> Task:
         return Task(
-            config=self.tasks_config["develop_backend"]
+            config=self.tasks_config["develop_backend"],
+            agent=self.backend_developer()
         )
 
     @task
     def create_test_cases(self) -> Task:
         return Task(
-            config=self.tasks_config["create_test_cases"]
+            config=self.tasks_config["create_test_cases"],
+            agent=self.qa_engineer()
         )
 
     # ---------------- CREW ---------------- #
