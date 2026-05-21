@@ -1,5 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+from crewai.memory import ShortTermMemory
+from crewai.memory.storage.rag_storage import RAGStorage
 
 
 @CrewBase
@@ -77,5 +79,18 @@ class AIDevTeam:
             agents=self.agents,
             tasks=self.tasks,
             process=Process.sequential,
-            verbose=True
+            verbose=True,
+            memory=True,
+            short_term_memory=ShortTermMemory(
+                storage=RAGStorage(
+                    embedder_config={
+                        "provider": "openai",
+                        "config": {
+                            "model": "text-embedding-3-small"
+                        }
+                    },
+                    type="short_term",
+                    path="./memory"
+                )
+            )
         )
