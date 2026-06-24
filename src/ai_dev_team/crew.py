@@ -1,8 +1,5 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from crewai.memory import ShortTermMemory
-from crewai.memory.storage.rag_storage import RAGStorage
-
 
 @CrewBase
 class AIDevTeam:
@@ -44,31 +41,34 @@ class AIDevTeam:
     # ---------------- TASKS ---------------- #
 
     @task
-    def gather_requirements(self) -> Task:
+    def gather_requirements(self):
         return Task(
             config=self.tasks_config["gather_requirements"],
-            agent=self.product_manager()
+            agent=self.product_manager(),
         )
 
     @task
     def design_architecture(self) -> Task:
         return Task(
             config=self.tasks_config["design_architecture"],
-            agent=self.software_architect()
+            agent=self.software_architect(),
+            context=[self.gather_requirements()]
         )
 
     @task
     def develop_backend(self) -> Task:
         return Task(
             config=self.tasks_config["develop_backend"],
-            agent=self.backend_developer()
+            agent=self.backend_developer(),
+            context=[self.design_architecture()],
         )
 
     @task
     def create_test_cases(self) -> Task:
         return Task(
             config=self.tasks_config["create_test_cases"],
-            agent=self.qa_engineer()
+            agent=self.qa_engineer(),
+            context=[self.develop_backend()]
         )
 
     # ---------------- CREW ---------------- #
@@ -80,17 +80,5 @@ class AIDevTeam:
             tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
-            memory=True,
-            short_term_memory=ShortTermMemory(
-                storage=RAGStorage(
-                    embedder_config={
-                        "provider": "openai",
-                        "config": {
-                            "model": "text-embedding-3-small"
-                        }
-                    },
-                    type="short_term",
-                    path="./memory"
-                )
-            )
+            memory=True
         )
