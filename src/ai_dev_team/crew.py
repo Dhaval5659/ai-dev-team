@@ -1,5 +1,7 @@
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Knowledge, Process, Task
 from crewai.project import CrewBase, agent, crew, task
+
+from tools.knowledge_reader_tool import KnowledgeReaderInput, KnowledgeReaderTool
 
 @CrewBase
 class AIDevTeam:
@@ -38,6 +40,14 @@ class AIDevTeam:
             verbose=True
         )
 
+    @agent 
+    def code_reviewer(self) -> Agent:
+        return Agent(
+            config=self.agents_config["code_reviewer"],
+            tools=[KnowledgeReaderTool()],
+            verbose=True
+        )
+
     # ---------------- TASKS ---------------- #
 
     @task
@@ -64,11 +74,22 @@ class AIDevTeam:
         )
 
     @task
+    def review_backend_code(self) -> Task:
+        return Task(
+            config=self.tasks_config["review_backend_code"],
+            agent=self.code_reviewer(),
+            context=[self.develop_backend()]
+        )
+    
+    @task
     def create_test_cases(self) -> Task:
         return Task(
             config=self.tasks_config["create_test_cases"],
             agent=self.qa_engineer(),
-            context=[self.develop_backend()]
+            context=[
+                self.develop_backend(),
+                self.review_backend_code()
+                ]
         )
 
     # ---------------- CREW ---------------- #

@@ -1,4 +1,4 @@
-from knowledge_reader_tool import KnowledgeReaderTool
+from tools.knowledge_reader_tool import KnowledgeReaderTool
 
 tool = KnowledgeReaderTool()
 

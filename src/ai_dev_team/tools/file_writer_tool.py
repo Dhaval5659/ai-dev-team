@@ -2,6 +2,7 @@ from pathlib import Path
 
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
+from utils.path_manager import PathManager
 
 
 class FileWriterInput(BaseModel):
@@ -16,8 +17,7 @@ class FileWriterTool(BaseTool):
     args_schema: type[BaseModel] = FileWriterInput
 
     def _run(self, file_name: str, content: str) -> str:
-        output_dir = Path("output")
-        output_dir.mkdir(exist_ok=True)
+        output_dir = PathManager.output_dir()
 
         file_path = output_dir / file_name
 

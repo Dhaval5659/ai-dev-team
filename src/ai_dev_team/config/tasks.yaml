@@ -74,3 +74,25 @@ create_test_cases:
     A detailed markdown QA test document.
 
   output_file: output/test_cases.md
+
+review_backend_code:
+  description: >
+    Review the generated backend code.
+
+    Before reviewing:
+    - Read coding_standards.md
+    - Read fastapi_best_practices.md
+
+    Check:
+    - code quality
+    - security
+    - mainatainability
+    - scalability
+    - API design
+
+    provide detailed feedback and suggestions.
+
+  expected_output: >
+    A markdown code review report with recommendation.
+  
+  output_file: output/code_review.md
